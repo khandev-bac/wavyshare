@@ -17,6 +17,7 @@ const pool = new Pool({
 // User table
 export const user = pgTable("user", {
     id: serial("id").primaryKey(),
+    clerkId: text("clerk_id").notNull(),
     name: text("name"),
     email: text("email"),
     profile: text("profile"),
