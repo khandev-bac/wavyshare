@@ -13,6 +13,6 @@ body {
   font-family:var(--font-poppins) ;
 }
 
-/* In your globals.css or a dedicated CSS file */
-
-
+.addfile{
+@apply w-[80%] h-24 border border-slate-300 rounded-xl flex justify-center items-center  transition cursor-pointer hover:bg-[#e0eaff] hover:border-0
+}

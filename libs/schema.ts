@@ -6,17 +6,12 @@ import {
     serial,
     text,
     timestamp,
+    uuid,
 } from "drizzle-orm/pg-core";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
-
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-});
 
 // User table
 export const user = pgTable("user", {
-    id: serial("id").primaryKey(),
+    id: uuid('id').defaultRandom().primaryKey(),
     clerkId: text("clerk_id").notNull(),
     name: text("name"),
     email: text("email"),
@@ -26,17 +21,16 @@ export const user = pgTable("user", {
 
 // File table with FK to user
 export const file = pgTable("file", {
-    id: serial("id").primaryKey(),
+    id: uuid('id').defaultRandom().primaryKey(),
     title: text("title"),
     message: text("message"),
-    fileName: text("file_message"),
+    fileUrl: text("file_url"),
+    fileName: text("file_name"),
     fileSize: integer("file_size"),
     expireIn: timestamp("expire_in"),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
-    userId: integer("user_id")
-        .notNull()
-        .references(() => user.id, { onDelete: "cascade" }),
+    userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
 });
 
 

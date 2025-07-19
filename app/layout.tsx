@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import Nvabar from "@/components/Nvabar";
+import { ClerkProvider, SignedIn, SignIn } from "@clerk/nextjs";
+
+
+import { Toaster } from "react-hot-toast";
 
 // ✅ Load font correctly and specify weights
 const poppins = Poppins({
@@ -12,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Wavy Share",
+  title: "WavyShare | Send file with proud simple",
   description: "Share files with pride",
 };
 
@@ -22,11 +24,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+
+    >
       <html lang="en" className={`${poppins.variable}`}>
-        <body>
-          <Nvabar />
+        <body
+        // className="bg-[#e0eaff]"
+        >
+
           {children}
+          <Toaster position="bottom-center" />
         </body>
       </html>
     </ClerkProvider>
