@@ -41,7 +41,7 @@ export function ShareButton({ title, message, fileUrl }: ShareButtonProps) {
     return (
         <button
             onClick={handleShare}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors cursor-pointer"
         >
             <Share2 className="w-5 h-5" />
             Share
@@ -113,7 +113,7 @@ export function DownloadButton({ fileUrl, fileName }: DownloadButtonProps) {
         <button
             onClick={handleDownload}
             disabled={isDownloading || !fileUrl}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors cursor-pointer"
         >
             <Download className={`w-5 h-5 ${isDownloading ? 'animate-bounce' : ''}`} />
             {isDownloading ? 'Downloading...' : 'Download File'}

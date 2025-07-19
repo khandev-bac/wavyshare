@@ -28,6 +28,7 @@ export default function RootLayout({
 
     >
       <html lang="en" className={`${poppins.variable}`}>
+        <link rel="icon" type="image/svg+xml" href="/wavy.svg" />
         <body
         // className="bg-[#e0eaff]"
         >

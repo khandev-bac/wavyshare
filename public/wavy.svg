@@ -1,0 +1,13 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#3B82F6"/>
+  
+  <!-- Simple wavy curves -->
+  <g stroke="white" stroke-width="3" fill="none" stroke-linecap="round">
+    <!-- Top wave -->
+    <path d="M8 13c3 0 3-4 6-4s3 4 6 4s3-4 6-4"/>
+    
+    <!-- Bottom wave -->
+    <path d="M8 19c3 0 3-4 6-4s3 4 6 4s3-4 6-4"/>
+  </g>
+</svg>
