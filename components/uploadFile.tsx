@@ -5,6 +5,7 @@ import { PlusCircleIcon, Upload } from 'lucide-react';
 import Input from './Input';
 import Button from './Button';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 interface UploadFileProps { }
 
@@ -14,6 +15,7 @@ const UploadFile: FC<UploadFileProps> = () => {
     const [file, setFile] = useState<File | null>(null);
     const [shareLink, setShareLink] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const handleFilePick = () => {
         const input = document.createElement('input');
@@ -41,12 +43,28 @@ const UploadFile: FC<UploadFileProps> = () => {
 
             const res = await axios.post('/api/upload', formData);
             setShareLink(res.data.shareLink);
+            // toast.success(message)
         } catch (err) {
             console.error('Upload failed:', err);
             alert('Upload failed');
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleCopyLink = async () => {
+        try {
+            await navigator.clipboard.writeText(shareLink);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
+
+    const truncateLink = (link: string, maxLength: number = 30) => {
+        if (link.length <= maxLength) return link;
+        return `${link.substring(0, maxLength)}...`;
     };
 
     return (
@@ -61,7 +79,7 @@ const UploadFile: FC<UploadFileProps> = () => {
 
             <div className="px-6 py-6">
                 {/* Upload File Section */}
-                <div className=" mb-8">
+                <div className="mb-8">
                     <button
                         className="w-full group relative overflow-hidden focus:outline-none cursor-pointer"
                         onClick={handleFilePick}
@@ -73,8 +91,12 @@ const UploadFile: FC<UploadFileProps> = () => {
                                     <div className="absolute inset-0 bg-blue-500 rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 scale-150"></div>
                                     <PlusCircleIcon className="relative text-blue-700 group-hover:text-blue-600 w-8 h-8 transition-all duration-300 group-hover:scale-110" />
                                 </div>
-                                <p className="text-sm text-black group-hover:text-blue-700 transition-colors duration-300">
-                                    {file ? file.name : 'Add file'}
+                                <p className="text-sm text-black group-hover:text-blue-700 transition-colors duration-300 text-center px-2">
+                                    {file ? (
+                                        <span className="break-all">{file.name.length > 30 ? `${file.name.substring(0, 30)}...` : file.name}</span>
+                                    ) : (
+                                        'Add file'
+                                    )}
                                 </p>
                             </div>
                         </div>
@@ -88,13 +110,19 @@ const UploadFile: FC<UploadFileProps> = () => {
                     <Button onClick={handleUpload} title={isLoading ? 'Uploading...' : 'Get Link'} />
                 </div>
 
-                {/* Link Output */}
+                {/* Link Output - Simple Display */}
                 {shareLink && (
-                    <div className="mt-6 text-sm text-blue-700 break-all text-center">
-                        <p className="font-semibold mb-1">Shareable Link:</p>
-                        <a href={shareLink} target="_blank" rel="noopener noreferrer" className="underline">
-                            {shareLink}
-                        </a>
+                    <div className="mt-4 p-3 bg-blue-50 rounded-lg text-center">
+                        <p className="text-xs text-gray-600 mb-1">Link:</p>
+                        <p className="text-sm text-blue-700 font-mono">
+                            {shareLink.length > 30 ? `${shareLink.substring(0, 30)}...` : shareLink}
+                        </p>
+                        <button
+                            onClick={handleCopyLink}
+                            className="mt-2 text-xs text-blue-600 hover:text-blue-800 underline"
+                        >
+                            {copied ? 'Copied!' : 'Copy Link'}
+                        </button>
                     </div>
                 )}
             </div>
