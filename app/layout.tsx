@@ -6,7 +6,7 @@ import { ClerkProvider, SignedIn, SignIn } from "@clerk/nextjs";
 
 import { Toaster } from "react-hot-toast";
 
-// ✅ Load font correctly and specify weights
+
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -29,10 +29,7 @@ export default function RootLayout({
     >
       <html lang="en" className={`${poppins.variable}`}>
         <link rel="icon" type="image/svg+xml" href="/wavy.svg" />
-        <body
-        // className="bg-[#e0eaff]"
-        >
-
+        <body>
           {children}
           <Toaster position="bottom-center" />
         </body>
