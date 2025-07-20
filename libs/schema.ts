@@ -18,7 +18,6 @@ export const user = pgTable("user", {
     profile: text("profile"),
     createdAt: timestamp("created_at").defaultNow(),
 });
-
 // File table with FK to user
 export const file = pgTable("file", {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -32,5 +31,10 @@ export const file = pgTable("file", {
     updatedAt: timestamp("updated_at").defaultNow(),
     userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
 });
-
-
+export const feedback = pgTable("feedback", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    feedBackMessage: text("feed_back_message"),
+    createdAt: timestamp("created_at").defaultNow(),
+    updatedAt: timestamp("updated_at").defaultNow(),
+    userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" })
+})
