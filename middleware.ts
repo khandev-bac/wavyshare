@@ -1,8 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
+
 const isPublicRoute = createRouteMatcher([
     '/',
-    '/file/(.*)', // Allow public file viewing
+    '/file/(.*)',
+    '/api/check',
+    '/api/feedback' // Allow public file viewing
 ])
 
 export default clerkMiddleware(async (auth, req) => {

@@ -1,4 +1,5 @@
 "use client"
+import Feedback from '@/components/feedback'
 import { SignUpButton, useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -9,6 +10,7 @@ function page() {
 
   useEffect(() => {
     if (isLoaded && isSignedIn) {
+      alert("logged in")
       router.push('/home')
     }
   }, [isSignedIn, isLoaded, router])
@@ -61,8 +63,10 @@ function page() {
 
         {/* CTA Button */}
         <div className="mb-16">
-          <SignUpButton>
-            <button className='bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-200'>
+          <SignUpButton signInFallbackRedirectUrl={"/home"}
+            forceRedirectUrl={"/home"}
+          >
+            <button className='loginBtn'>
               Get Started
             </button>
           </SignUpButton>
@@ -85,6 +89,7 @@ function page() {
         </div>
 
       </div>
+      {/* <Feedback /> */}
     </div>
   )
 }

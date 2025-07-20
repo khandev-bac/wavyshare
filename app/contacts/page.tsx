@@ -1,3 +1,4 @@
+import Feedback from '@/components/feedback';
 import React from 'react';
 
 interface ContactProps {
@@ -18,6 +19,9 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
             <div className="p-4">
                 {/* Content */}
                 <p></p>
+            </div>
+            <div className='flex flex-col justify-end'>
+                <Feedback />
             </div>
         </div>
     );
