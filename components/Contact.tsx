@@ -1,4 +1,6 @@
+"use client"
 import Feedback from '@/components/feedback';
+
 import React from 'react';
 
 interface ContactProps {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Transfer from "@/app/transfers/page";
-import Contacts from '@/app/contacts/page';
+import Transfer from "@/components/transfer";
+import Contacts from '@/components/Contact';
 
 const nav = [
     { name: 'Transfers', id: 'transfers' },
